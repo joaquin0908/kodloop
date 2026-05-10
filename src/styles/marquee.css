@@ -1,0 +1,31 @@
+.kl-marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  background: var(--bg);
+}
+.kl-marquee__track {
+  display: flex; gap: 36px;
+  white-space: nowrap;
+  animation: scroll-x linear infinite;
+  width: max-content;
+}
+.kl-marquee[data-reverse="true"] .kl-marquee__track {
+  animation-direction: reverse;
+}
+@keyframes scroll-x { to { transform: translateX(-33.333%); } }
+.kl-marquee__item {
+  display: inline-flex; align-items: center; gap: 36px;
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 4vw, 56px);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.kl-marquee__star {
+  color: var(--accent);
+  font-size: 0.5em;
+  display: inline-block;
+  animation: spin 6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

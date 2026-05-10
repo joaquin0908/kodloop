@@ -1,0 +1,72 @@
+<!-- Contacto section + Footer -->
+<section id="contacto" class="kl-contacto" data-screen-label="05 Contacto">
+  <div class="kl-section-head kl-section-head--dark" data-reveal>
+    <span class="kl-num mono">05 / CONTACTO</span>
+    <span class="mono kl-section-head__meta">— AGENDÁ UNA LLAMADA</span>
+  </div>
+
+  <div class="kl-contacto__main" data-reveal data-reveal-delay="1">
+    <h2 class="kl-display kl-display--small">
+      <span class="kl-display__row">
+        <span class="kl-display__bracket">{`{`}</span>
+        <span class="kl-display__word">HABLEMOS</span>
+      </span>
+      <span class="kl-display__row kl-display__row--end">
+        <span class="kl-display__word kl-display__word--outline">DE TU IDEA</span>
+        <span class="kl-display__bracket">{`}`}</span>
+      </span>
+    </h2>
+
+    <a href="mailto:kodloop@kodloop.com" class="kl-contacto__cta">
+      <span class="kl-contacto__cta-lbl mono">— AGENDAR REUNIÓN</span>
+      <span class="kl-contacto__cta-big">kodloop@kodloop.com</span>
+      <span class="kl-contacto__cta-sub mono">30 MIN — SIN COMPROMISO</span>
+    </a>
+  </div>
+
+  <div class="kl-contacto__grid">
+    <div class="kl-contacto__cell" data-reveal data-reveal-delay="1">
+      <span class="mono kl-contacto__lbl">/ EMAIL</span>
+      <a href="mailto:kodloop@kodloop.com">kodloop@kodloop.com</a>
+    </div>
+    <div class="kl-contacto__cell" data-reveal data-reveal-delay="2">
+      <span class="mono kl-contacto__lbl">/ INSTAGRAM</span>
+      <a href="https://www.instagram.com/kodloop.ar/" target="_blank" rel="noopener noreferrer">@kodloop.ar</a>
+    </div>
+    <div class="kl-contacto__cell" data-reveal data-reveal-delay="3">
+      <span class="mono kl-contacto__lbl">/ UBICACIÓN</span>
+      <span>San Juan, AR</span>
+    </div>
+    <div class="kl-contacto__cell" data-reveal data-reveal-delay="4">
+      <span class="mono kl-contacto__lbl">/ HORARIO LOCAL</span>
+      <span id="contacto-clock" aria-live="polite" aria-atomic="true"></span>
+    </div>
+  </div>
+</section>
+
+<footer class="kl-footer">
+  <div class="kl-footer__top">
+    <span class="kl-footer__wordmark-text">KODLOOP</span>
+  </div>
+  <div class="kl-footer__bottom mono">
+    <span>© KODLOOP <span id="footer-year"></span></span>
+    <span>SOFTWARE STUDIO · SJN</span>
+    <span>STILL LOOPING</span>
+  </div>
+</footer>
+
+<script>
+  // Live clock (updates every 30s)
+  const clockEl = document.getElementById('contacto-clock');
+  function tickContacto() {
+    const d = new Date();
+    const fmt = (n: number) => String(n).padStart(2, '0');
+    if (clockEl) clockEl.textContent = `${fmt(d.getHours())}:${fmt(d.getMinutes())} SJN`;
+  }
+  tickContacto();
+  setInterval(tickContacto, 30000);
+
+  // Footer year
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+</script>

@@ -1,0 +1,20 @@
+---
+export interface Props {
+  items: string[];
+  speed?: number;
+  reverse?: boolean;
+}
+const { items, speed = 40, reverse = false } = Astro.props;
+// Triple the items so the loop animation is seamless
+const tripled = [...items, ...items, ...items];
+---
+<div class="kl-marquee" data-reverse={reverse ? 'true' : 'false'}>
+  <div class="kl-marquee__track" style={`animation-duration: ${speed}s`}>
+    {tripled.map((item) => (
+      <span class="kl-marquee__item">
+        <span>{item}</span>
+        <span class="kl-marquee__star" aria-hidden="true">✱</span>
+      </span>
+    ))}
+  </div>
+</div>

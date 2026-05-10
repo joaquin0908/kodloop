@@ -1,0 +1,138 @@
+---
+interface Proyecto {
+  n: string;
+  cliente: string;
+  title: string;
+  cat: string;
+  year: string;
+  stack: string[];
+  url: string;
+  accent: 'wine' | 'rose' | 'cream' | 'dark';
+  size: 'lg' | 'md';
+  blurb: string;
+}
+
+const PROYECTOS: Proyecto[] = [
+  {
+    n: '01',
+    cliente: 'Alberdi Servicios',
+    title: 'Sitio corporativo',
+    cat: 'WEB / B2B',
+    year: '2024',
+    stack: ['Next.js', 'Tailwind', 'Vercel'],
+    url: 'https://alberdiservicios.com/',
+    accent: 'wine',
+    size: 'lg',
+    blurb: 'Plataforma institucional para empresa de servicios. Foco en conversión y carga rápida.',
+  },
+  {
+    n: '02',
+    cliente: 'Diparola Automotores',
+    title: 'Catálogo & gestión',
+    cat: 'WEB / AUTOMOTRIZ',
+    year: '2024',
+    stack: ['Next.js', 'CMS', 'API'],
+    url: 'https://diparolaautomotores.com.ar/',
+    accent: 'rose',
+    size: 'md',
+    blurb: 'Catálogo de vehículos con gestión de stock y formulario de consulta integrado.',
+  },
+  {
+    n: '03',
+    cliente: 'Juanpis Burgers',
+    title: 'E-commerce gastronómico',
+    cat: 'WEB / FOOD',
+    year: '2024',
+    stack: ['React', 'Vercel', 'Stripe'],
+    url: 'https://juanpis-burgers.vercel.app/',
+    accent: 'cream',
+    size: 'md',
+    blurb: 'Tienda online para hamburguesería. Pedido rápido, mobile-first, integración de pagos.',
+  },
+  {
+    n: '04',
+    cliente: 'Sistema Finca',
+    title: 'Gestión agropecuaria',
+    cat: 'SAAS / AGRO',
+    year: '2025',
+    stack: ['React', 'Node', 'PostgreSQL'],
+    url: 'https://portfolio-octavio.vercel.app/sistema-finca',
+    accent: 'dark',
+    size: 'lg',
+    blurb: 'Sistema de gestión integral para fincas. Stock, ventas, lotes, reportes en un solo lugar.',
+  },
+];
+---
+<!-- Proyectos — asymmetric project grid with custom cursor -->
+<section id="proyectos" class="kl-proyectos" data-screen-label="04 Proyectos">
+  <div class="kl-section-head" data-reveal>
+    <span class="kl-num mono">04 / PROYECTOS</span>
+    <span class="mono kl-section-head__meta">— EN PRODUCCIÓN</span>
+  </div>
+
+  <div class="kl-proyectos__intro" data-reveal data-reveal-delay="1">
+    <h2 class="kl-h2">
+      Cosas reales,<br/>
+      <em>en producción</em>,<br/>
+      que ya están pagando facturas.
+    </h2>
+    <div class="kl-proyectos__intro-meta mono">
+      <span>04 PROYECTOS SELECCIONADOS</span>
+      <span>CLICK PARA VISITAR</span>
+    </div>
+  </div>
+
+  <div class="kl-proyectos__grid">
+    {PROYECTOS.map((p, i) => (
+      <a
+        href={p.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`kl-proyecto kl-proyecto--${p.accent} kl-proyecto--${p.size}`}
+        data-proyecto
+        data-reveal
+        data-reveal-delay={String(i + 1)}
+      >
+        <div class="kl-proyecto__top">
+          <span class="kl-proyecto__n mono">{p.n}</span>
+          <span class="kl-proyecto__cat mono">{p.cat} · {p.year}</span>
+        </div>
+
+        <div class="kl-proyecto__body">
+          <div class="kl-proyecto__cliente mono">{p.cliente.toUpperCase()}</div>
+          <h3 class="kl-proyecto__title">{p.title}</h3>
+          <p class="kl-proyecto__blurb">{p.blurb}</p>
+        </div>
+
+        <div class="kl-proyecto__bottom">
+          <ul class="kl-proyecto__stack mono">
+            {p.stack.map((s) => <li>{s}</li>)}
+          </ul>
+          <span class="kl-proyecto__arrow">VISITAR</span>
+        </div>
+
+        <!-- Custom cursor dot that follows mouse -->
+        <div class="kl-proyecto__cursor mono" aria-hidden="true">VER<br/>SITIO</div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<script>
+  // Custom cursor follow per project card
+  document.querySelectorAll<HTMLElement>('[data-proyecto]').forEach((card) => {
+    const cursor = card.querySelector<HTMLElement>('.kl-proyecto__cursor');
+    if (!cursor) return;
+
+    card.addEventListener('mouseenter', () => {
+      cursor.style.opacity = '1';
+    });
+    card.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+    });
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      cursor.style.transform = `translate(${e.clientX - rect.left}px, ${e.clientY - rect.top}px)`;
+    });
+  });
+</script>

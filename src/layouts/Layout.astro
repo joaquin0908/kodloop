@@ -1,23 +1,62 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Kodloop</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'KodLoop — Software studio que loopea',
+  description = 'Estudio de software desde San Juan, Argentina. Construimos productos para clientes y prototipos sin sentido para nosotros.',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es-AR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  @import '../styles/global.css';
+  @import '../styles/utils.css';
+  @import '../styles/navbar.css';
+  @import '../styles/loader.css';
+  @import '../styles/hero.css';
+  @import '../styles/marquee.css';
+  @import '../styles/nosotros.css';
+  @import '../styles/servicios.css';
+  @import '../styles/proyectos.css';
+  @import '../styles/contacto.css';
+  @import '../styles/mobile.css';
+  @import '../styles/animations.css';
 </style>
+
+<script>
+  // Global scroll-reveal: adds .is-visible when elements enter the viewport.
+  // Unobserves immediately after triggering — each element animates once.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
+  );
+
+  document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+</script>

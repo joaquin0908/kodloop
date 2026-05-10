@@ -1,0 +1,131 @@
+---
+const SERVICIOS = [
+  {
+    n: '01',
+    title: 'SOFTWARE A MEDIDA',
+    desc: 'Sistemas internos, ERPs, dashboards. Hechos para tu operación, no para encajar en una plantilla.',
+    bullets: ['ERPs / CRMs', 'Backoffice', 'Integraciones API', 'Automaciones'],
+  },
+  {
+    n: '02',
+    title: 'WEB & E-COMMERCE',
+    desc: 'Sitios institucionales, landings de alto impacto y tiendas que cargan rápido y venden.',
+    bullets: ['Landing pages', 'Sitios corporativos', 'Tiendas Shopify / custom', 'CMS headless'],
+  },
+  {
+    n: '03',
+    title: 'APPS MÓVILES',
+    desc: 'Aplicaciones nativas y multiplataforma. iOS, Android, lo que necesite tu producto.',
+    bullets: ['React Native', 'PWAs', 'Backend escalable', 'Push & deep links'],
+  },
+  {
+    n: '04',
+    title: 'IA & AUTOMACIÓN',
+    desc: 'Agentes, asistentes, pipelines de datos. Lo que la IA hace bien, integrado en tu producto.',
+    bullets: ['Agentes Claude / GPT', 'RAG y embeddings', 'Workflows n8n', 'Scrapers'],
+  },
+  {
+    n: '05',
+    title: 'EXPERIMENTOS',
+    desc: 'Nuestro modo loop: prototipos raros, tech nueva, side-projects. Si te enganchás, los hacemos para vos.',
+    bullets: ['WebGL / Three.js', 'Generative UI', 'Hardware + software', 'Lo que aún no existe'],
+  },
+] as const;
+---
+<!-- Servicios — sticky horizontal scroll section -->
+<section id="servicios" class="kl-servicios" data-screen-label="03 Servicios">
+  <div class="kl-servicios__sticky" id="servicios-sticky">
+    <div class="kl-servicios__head">
+      <div class="kl-section-head kl-section-head--dark" data-reveal>
+        <span class="kl-num mono">03 / SERVICIOS</span>
+        <span class="mono kl-section-head__meta">— SCROLLEÁ PARA AVANZAR</span>
+      </div>
+      <h2 class="kl-h2 kl-h2--dark" data-reveal data-reveal-delay="1">
+        Cinco maneras de meternos en tu producto.
+      </h2>
+      <div class="kl-servicios__progress" id="servicios-progress">
+        <div class="kl-servicios__progress-fill" id="servicios-fill"></div>
+        <span class="mono kl-servicios__progress-lbl" id="servicios-lbl">
+          01<span class="kl-mute">/0{SERVICIOS.length}</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="kl-servicios__viewport">
+      <div class="kl-servicios__track" id="servicios-track">
+        {SERVICIOS.map((s) => (
+          <article class="kl-servicio" data-n={s.n}>
+            <div class="kl-servicio__top">
+              <span class="kl-servicio__n">{s.n}</span>
+              <span class="mono kl-servicio__tag">SERVICIO</span>
+            </div>
+            <h3 class="kl-servicio__title">{s.title}</h3>
+            <p class="kl-servicio__desc">{s.desc}</p>
+            <ul class="kl-servicio__bullets mono">
+              {s.bullets.map((b) => (
+                <li><span class="kl-bullet-mark">/</span> {b}</li>
+              ))}
+            </ul>
+            <div class="kl-servicio__corner mono">{`{KL—${s.n}}`}</div>
+          </article>
+        ))}
+        <!-- CTA card -->
+        <article class="kl-servicio kl-servicio--end">
+          <h3 class="kl-servicio__title">¿NECESITÁS<br/>OTRA COSA?</h3>
+          <p class="kl-servicio__desc">Contanos qué tenés en mente. Si no lo sabemos hacer, te lo decimos. Si lo sabemos, te damos un plan.</p>
+          <a href="#contacto" class="kl-cta kl-cta--inline">
+            <span class="kl-cta__label">HABLEMOS</span>
+            <span class="kl-cta__sub mono">—</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const wrap = document.getElementById('servicios') as HTMLElement;
+  const sticky = document.getElementById('servicios-sticky') as HTMLElement;
+  const track = document.getElementById('servicios-track') as HTMLElement;
+  const fill = document.getElementById('servicios-fill') as HTMLElement;
+  const lbl = document.getElementById('servicios-lbl') as HTMLElement;
+
+  const TOTAL_CARDS = 5;
+
+  if (wrap && sticky && track) {
+    let ticking = false;
+
+    const setHeight = () => {
+      const extra = Math.max(0, track.scrollWidth - sticky.clientWidth);
+      wrap.style.height = `${sticky.offsetHeight + extra}px`;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const rect = wrap.getBoundingClientRect();
+        const total = wrap.offsetHeight - sticky.offsetHeight;
+        const scrolled = Math.min(Math.max(-rect.top, 0), total);
+        const p = total > 0 ? scrolled / total : 0;
+
+        if (fill) fill.style.width = `${p * 100}%`;
+        if (lbl) {
+          const cur = String(Math.min(TOTAL_CARDS, Math.floor(p * TOTAL_CARDS) + 1)).padStart(2, '0');
+          lbl.innerHTML = `${cur}<span class="kl-mute">/${String(TOTAL_CARDS).padStart(2, '0')}</span>`;
+        }
+
+        const maxX = Math.max(0, track.scrollWidth - sticky.clientWidth);
+        track.style.transform = `translate3d(${-p * maxX}px, 0, 0)`;
+      });
+    };
+
+    setHeight();
+    onScroll();
+    setTimeout(setHeight, 500);
+
+    window.addEventListener('resize', setHeight);
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

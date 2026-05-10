@@ -1,0 +1,118 @@
+<!-- Hero — full-viewport with animated SVG background, parallax, live clock -->
+<section class="kl-hero" data-screen-label="01 Hero">
+  <!-- Animated SVG background -->
+  <svg class="kl-hero__bg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <pattern id="kl-grid" width="80" height="80" patternUnits="userSpaceOnUse">
+        <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+      </pattern>
+    </defs>
+    <rect width="1600" height="900" fill="url(#kl-grid)"/>
+    <!-- Large rotating ring -->
+    <g class="kl-hero__bg-ring" style="transform-origin: 1300px 250px">
+      <circle cx="1300" cy="250" r="200" fill="none" stroke="currentColor" stroke-width="1" opacity="0.25" stroke-dasharray="4 8"/>
+      <circle cx="1300" cy="250" r="140" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+      <circle cx="1300" cy="250" r="80" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6" stroke-dasharray="20 6"/>
+    </g>
+    <!-- Counter-rotating ring -->
+    <g class="kl-hero__bg-ring kl-hero__bg-ring--rev" style="transform-origin: 200px 700px">
+      <circle cx="200" cy="700" r="120" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-dasharray="2 4"/>
+      <circle cx="200" cy="700" r="60" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+      <line x1="80" y1="700" x2="320" y2="700" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+      <line x1="200" y1="580" x2="200" y2="820" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+    </g>
+    <!-- Floating brackets -->
+    <text class="kl-hero__bg-bracket kl-hero__bg-bracket--a" x="100" y="200" font-family="monospace" font-size="80" fill="currentColor" opacity="0.12">{`{`}</text>
+    <text class="kl-hero__bg-bracket kl-hero__bg-bracket--b" x="1450" y="800" font-family="monospace" font-size="80" fill="currentColor" opacity="0.12">{`}`}</text>
+    <!-- Dashed loop curve -->
+    <path class="kl-hero__bg-loop" d="M 0 450 Q 400 350 800 450 T 1600 450" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35" stroke-dasharray="6 10"/>
+    <!-- Scattered dots -->
+    <g class="kl-hero__bg-dots">
+      <circle cx="450" cy="150" r="3" fill="currentColor" opacity="0.4"/>
+      <circle cx="900" cy="700" r="2" fill="currentColor" opacity="0.5"/>
+      <circle cx="1100" cy="120" r="4" fill="currentColor" opacity="0.3"/>
+      <circle cx="600" cy="780" r="2" fill="currentColor" opacity="0.4"/>
+      <circle cx="350" cy="500" r="2" fill="currentColor" opacity="0.5"/>
+    </g>
+  </svg>
+
+  <!-- Top utility bar -->
+  <div class="kl-hero__topbar">
+    <span class="mono">[ KL—001 ]</span>
+    <span class="mono">SOFTWARE STUDIO / EST. 2024</span>
+    <span class="mono" id="hero-clock" aria-live="polite" aria-atomic="true"></span>
+  </div>
+
+  <!-- Giant display type -->
+  <div class="kl-hero__type" id="hero-type">
+    <h1 class="kl-display">
+      <span class="kl-display__row">
+        <span class="kl-display__word">CÓDIGO</span>
+        <span class="kl-display__bracket">{`{`}</span>
+      </span>
+      <span class="kl-display__row kl-display__row--offset">
+        <span class="kl-display__word kl-display__word--outline">QUE</span>
+        <span class="kl-display__word">LOOPEA.</span>
+      </span>
+      <span class="kl-display__row kl-display__row--end">
+        <span class="kl-display__bracket">{`}`}</span>
+        <span class="kl-display__word kl-display__word--small">IDEAS QUE NO.</span>
+      </span>
+    </h1>
+  </div>
+
+  <!-- Bottom info grid -->
+  <div class="kl-hero__bottom">
+    <div class="kl-hero__cell kl-hero__cell--lead">
+      <span class="kl-tag mono">— MANIFIESTO</span>
+      <p>
+        Estudio de software <em>desde San Juan, Argentina.</em> Construimos productos para clientes
+        y prototipos sin sentido para nosotros — porque ahí, en lo raro, es donde aprendemos.
+      </p>
+    </div>
+    <div class="kl-hero__cell kl-hero__cell--meta">
+      <span class="kl-tag mono">— ENFOQUE</span>
+      <ul class="kl-hero__list mono">
+        <li><span>01</span>Software a medida</li>
+        <li><span>02</span>Web &amp; e-commerce</li>
+        <li><span>03</span>Apps móviles</li>
+        <li><span>04</span>IA / automación</li>
+        <li><span>05</span>Experimentos</li>
+      </ul>
+    </div>
+    <div class="kl-hero__cell kl-hero__cell--cta">
+      <a href="#contacto" class="kl-cta">
+        <span class="kl-cta__label">AGENDAR</span>
+        <span class="kl-cta__sub mono">UNA REUNIÓN</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="kl-hero__cue mono" aria-hidden="true">
+    <span>SCROLL</span>
+    <span class="kl-hero__cue-line"></span>
+    <span class="kl-hero__cue-arrow">/</span>
+  </div>
+</section>
+
+<script>
+  // Live clock
+  const clockEl = document.getElementById('hero-clock');
+  function tick() {
+    const d = new Date();
+    const fmt = (n: number) => String(n).padStart(2, '0');
+    if (clockEl) {
+      clockEl.textContent = `${fmt(d.getHours())}:${fmt(d.getMinutes())}:${fmt(d.getSeconds())} -03 SJN`;
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // Parallax on scroll
+  const typeEl = document.getElementById('hero-type');
+  window.addEventListener('scroll', () => {
+    const parallax = Math.min(window.scrollY * 0.4, 200);
+    if (typeEl) typeEl.style.transform = `translateY(${-parallax * 0.2}px)`;
+  }, { passive: true });
+</script>

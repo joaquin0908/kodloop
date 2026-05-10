@@ -1,6 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Loader from '../components/Loader.astro';
+import Navbar from '../components/Navbar.astro';
+import Marquee from '../components/Marquee.astro';
+import Hero from '../sections/Hero.astro';
+import Nosotros from '../sections/Nosotros.astro';
+import Servicios from '../sections/Servicios.astro';
+import Proyectos from '../sections/Proyectos.astro';
+import Contacto from '../sections/Contacto.astro';
 ---
 
 <Layout>
+  <Loader />
+  <Navbar />
+  <main>
+    <Hero />
+    <Marquee
+      items={['CÓDIGO', 'QUE LOOPEA', 'IDEAS QUE NO', 'SOFTWARE STUDIO', 'EST. 2024', 'SJN / AR']}
+      speed={40}
+    />
+    <Nosotros />
+    <Servicios />
+    <Marquee
+      items={['EN PRODUCCIÓN', 'PROYECTOS REALES', '04 CASOS', 'KODLOOP®']}
+      speed={48}
+      reverse
+    />
+    <Proyectos />
+    <Contacto />
+  </main>
 </Layout>

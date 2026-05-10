@@ -1,0 +1,19 @@
+<!-- Splash screen: animates in, fades out after 1.2s, removed after 1.9s -->
+<div class="kl-loader" id="kl-loader" aria-hidden="true">
+  <div class="kl-loader__inner">
+    <span class="kl-loader__bracket">{`{`}</span>
+    <span class="kl-loader__k">K</span>
+    <span class="kl-loader__bracket">{`}`}</span>
+  </div>
+  <div class="kl-loader__bar">
+    <div class="kl-loader__fill"></div>
+  </div>
+</div>
+
+<script>
+  const loader = document.getElementById('kl-loader');
+  if (loader) {
+    setTimeout(() => loader.classList.add('kl-loader--done'), 1200);
+    setTimeout(() => loader.remove(), 1900);
+  }
+</script>

@@ -1,0 +1,83 @@
+.kl-contacto {
+  background: var(--wine-deep);
+  color: var(--cream);
+  padding: 96px 24px;
+  --bg: var(--wine-deep); --fg: var(--cream);
+  --line: rgba(245,237,232,0.15); --line-strong: rgba(245,237,232,0.4);
+  --muted: rgba(245,237,232,0.55); --accent: var(--wine-bright);
+}
+.kl-contacto__main {
+  padding: 48px 0;
+  display: grid; gap: 48px;
+}
+.kl-contacto__cta {
+  display: grid; gap: 12px;
+  padding: 32px;
+  border: 1px solid var(--line-strong);
+  transition: background 0.2s, border-color 0.2s;
+}
+.kl-contacto__cta:hover { background: var(--accent); border-color: var(--accent); }
+.kl-contacto__cta-lbl { color: var(--muted); }
+.kl-contacto__cta:hover .kl-contacto__cta-lbl,
+.kl-contacto__cta:hover .kl-contacto__cta-sub { color: var(--cream); opacity: 0.85; }
+.kl-contacto__cta-big {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 4vw, 56px);
+  letter-spacing: -0.02em;
+}
+.kl-contacto__cta-sub { color: var(--muted); }
+
+.kl-contacto__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line-strong);
+}
+.kl-contacto__cell {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 24px 16px;
+  border: 1px solid var(--line);
+  min-height: 110px;
+}
+.kl-contacto__cell a,
+.kl-contacto__cell span:not(.mono) {
+  font-family: var(--ff-display);
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+.kl-contacto__lbl { color: var(--muted); }
+
+@media (max-width: 768px) {
+  .kl-contacto__grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== FOOTER ===== */
+.kl-footer {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 32px 24px 24px;
+}
+.kl-footer__top {
+  display: flex; justify-content: center;
+  padding: 24px 0 48px;
+  border-bottom: 1px solid rgba(245,237,232,0.15);
+  margin-bottom: 24px;
+}
+.kl-footer__wordmark {
+  width: min(80vw, 900px);
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+.kl-footer__wordmark-text {
+  font-family: var(--ff-display);
+  font-size: clamp(48px, 10vw, 120px);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.95;
+}
+.kl-footer__bottom {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  color: rgba(245,237,232,0.5);
+}
