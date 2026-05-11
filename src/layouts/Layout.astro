@@ -4,8 +4,8 @@ export interface Props {
   description?: string;
 }
 const {
-  title = 'KodLoop — Software studio que loopea',
-  description = 'Estudio de software desde San Juan, Argentina. Construimos productos para clientes y prototipos sin sentido para nosotros.',
+  title = 'KodLoop — Agencia de Software',
+  description = 'Agencia de software desde San Juan, Argentina. Desarrollamos soluciones digitales sólidas para potenciar negocios.',
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
