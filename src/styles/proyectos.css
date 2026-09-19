@@ -40,9 +40,10 @@
 .kl-proyecto:hover { transform: translate(-4px, -4px); }
 .kl-proyecto--lg { grid-column: span 7; min-height: 480px; }
 .kl-proyecto--md { grid-column: span 5; }
+.kl-proyecto:last-child:nth-child(odd) { grid-column: span 12; min-height: 420px; }
 
 @media (max-width: 900px) {
-  .kl-proyecto--lg, .kl-proyecto--md { grid-column: span 12; }
+  .kl-proyecto--lg, .kl-proyecto--md, .kl-proyecto:last-child:nth-child(odd) { grid-column: span 12; }
 }
 
 .kl-proyecto--wine { background: var(--wine-deep); color: var(--cream); border-color: var(--wine-deep); }
